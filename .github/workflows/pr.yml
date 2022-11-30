@@ -1,0 +1,30 @@
+name: Demoo
+
+on:
+  push:
+    branches:
+      -main
+jobs:
+  updateAuthor:
+    runs-on:  ubuntu-latest
+    steps:
+      - name:  Step-1
+        uses: actions/checkout@v2
+        
+      - name: Step-2
+        uses: rlespinasse/git-commit-data-action@v1.x
+        
+      - name: Update
+        run : echo ${{env.GIT_COMMIT_AUTHOR_NAME}} > AUTHOR
+        
+      - name: Raise PR
+        uses: peter-evans/create-pull-request@v3
+        with:
+          branch: "auto-pr-branch"
+          base: main
+          title:  "demo"
+          committer:  ${{env.GIT_COMMIT_AUTHOR_NAME }} <${{env.GIT_COMMIT_AUTHOR_EMAIL }}">
+          author: ${{env.GIT_COMMIT_AUTHOR_NAME }} <${{env.GIT_COMMIT_AUTHOR_EMAIL }}">
+          body:
+            This is Demo
+          token: ${{secrets.GITHUB_TOKEN}}
