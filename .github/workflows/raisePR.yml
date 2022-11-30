@@ -1,8 +1,5 @@
 name: ram-custom
-on:
-  release:
-    types:
-      - published
+on: [pull_request_target, issues]
 
 jobs:
   test:
@@ -14,8 +11,7 @@ jobs:
          with:
            token: ${{ secrets.TOKEN }}
            base-branches:
-            - 'another-branch-uat'
-            - 'another-two-branch-uat'
+            'another'
            title-suffix: 'Release UAT'
            branch-suffix: '-UAT'
            release-prefix: 'release'
