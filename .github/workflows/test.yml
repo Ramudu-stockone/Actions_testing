@@ -1,1 +1,10 @@
-on 
+on:
+  branch_protection_rule:
+    types: [created, deleted]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Greetings, from an org
+        uses: almond-org/hello-world@v1
