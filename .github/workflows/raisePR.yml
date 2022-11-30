@@ -1,0 +1,21 @@
+name: ram-custom
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      -  uses: actions/checkout@v2
+      -  uses: actions/setup-node@v1
+      -  uses: natealcedo/pull-request-from-release-action@v1
+         with:
+           token: ${{ secrets.TOKEN }}
+           base-branches:
+            - 'another-branch-uat'
+            - 'another-two-branch-uat'
+           title-suffix: 'Release UAT'
+           branch-suffix: '-UAT'
+           release-prefix: 'release'
